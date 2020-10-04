@@ -75,11 +75,20 @@ public double getTheta(){
 //	return typeCoord == 'P' ? theta : getX();
 }
 
+public char getType(){
+	return typeCoord;
+}
+
+private void setType(char type){
+	typeCoord = type;
+}
 /**
  * Convertit cartesien --> polaire, le retour est void comme on n'enregistre rien
  */
 public void convertStorageToPolar(){
-	typeCoord = 'P';
+	if(getType()=='C'){
+		setType('P');
+	}
 }
 
 /**
@@ -87,7 +96,9 @@ public void convertStorageToPolar(){
  */
 
 public void convertStorageToCartesian(){
-	typeCoord = 'C';
+	if(getType()=='P'){
+		setType('C');
+	}
 }
 
 /**
@@ -99,7 +110,8 @@ public void convertStorageToCartesian(){
  * @return The distance between the two points.
  */
 public double getDistance(PointCP4 pointB){
-	return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) + Math.pow(getY() - pointB.getY(), 2)));
+	return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) +
+										Math.pow(getY() - pointB.getY(), 2)));
 }
 
 /**
@@ -112,10 +124,13 @@ public double getDistance(PointCP4 pointB){
  */
 //not sure how to do this one
 public PointCP4 rotatePoint(double rotation){
-
-	return new PointCP4('C', (Math.cos(Math.toRadians(rotation)) * getX()) - (Math.sin(Math.toRadians(rotation)) * getY()),
-   (Math.sin(Math.toRadians(rotation)) * getX()) + (Math.cos(Math.toRadians(rotation)) * getY()));
-}
+	double newTheta = getTheta()+rotation;
+	if(getType()=='C'){
+		PointCP4 tmp = new PointCP4('P',getRho(), newTheta);
+		tmp.setType('C');
+		return tmp;
+	}
+	return new PointCP4('P',getRho(),newTheta);}
 
 /**
  * Returns information about the coordinates.

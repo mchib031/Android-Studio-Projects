@@ -12,69 +12,75 @@ public class PointCP3 {
 /**
  * Contient le type de la donnee soit cartesienne (C) ou polaire (P)
  */
-private char typeCoord;
+	private char typeCoord;
 
 /**
  * Contient soit x ou rho dependamment du type de coordonnees
  */
-private double x;
+	private double x;
 
 /**
  * Contient Y ou theta dependamment du type de coordonnees
  */
-private double y;
+	private double y;
 
 
-//Constructeurs
+	//Constructeurs
 
 
-public PointCP3(char type, double xOrRho, double yOrTheta){
-								if(type != 'C' && type != 'P')
-																throw new IllegalArgumentException();
-
-								if (type == 'P') {
-																this.x = (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
-																this.y = (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
-								} else {
-																this.x = xOrRho;
-																this.y = yOrTheta;
-								}
-								typeCoord = 'C';
+	public PointCP3(char type, double xOrRho, double yOrTheta){
+		if(type != 'C' && type != 'P'){
+			throw new IllegalArgumentException();
+					}
+					if (type == 'P') {
+						typeCoord = 'C';
+						this.x = (Math.cos(Math.toRadians(yOrTheta)) * xOrRho);
+						this.y = (Math.sin(Math.toRadians(yOrTheta)) * xOrRho);
+					}
+					else {
+						typeCoord = 'C';
+						this.x = xOrRho;
+						this.y = yOrTheta;
+					}
 }
 
 
 
-public double getX()
-{
-								return x;
-
+public double getX(){
+	return x;
 }
 
 public double getY()
 {
-
-								return y;
-
+	return y;
 }
 
 // methode pour trouver la valeur de rho
 public double getRho()
 {
-								return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+	return (Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
 }
 
 // methode pour trouver la valeur de theta
 public double getTheta()
 {
-								return (Math.toDegrees(Math.atan2(getTheta(), getRho())));
-
+	return (Math.toDegrees(Math.atan2(getX(), getY())));
 }
 
+public char getType(){
+	return typeCoord;
+}
+
+private void setType(char type){
+	typeCoord = type;
+}
 /**
  * conertit les donnees cartesienne en donnee polaire.
  */
-public PointCP2 convertStorageToPolar(){
-								return new PointCP2(typeCoord, getX(), getY());
+public void convertStorageToPolar(){
+	if(getType()=='C'){
+		setType('P');
+	}
 }
 
 
@@ -82,8 +88,10 @@ public PointCP2 convertStorageToPolar(){
  * convertit les donnees polaire en cartesienne
  */
 
-public PointCP3 convertStorageToCartesian(){
-								return this;
+public void convertStorageToCartesian(){
+	if(getType()=='P'){
+		setType('C');
+	}
 }
 
 
@@ -99,8 +107,8 @@ public double getDistance(PointCP3 pointB)
 {
 								// Obtain differences in X and Y, sign is not important as these values
 								// will be squared later.
-
-								return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) + Math.pow(getY() - pointB.getY(), 2)));
+		return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) +
+											Math.pow(getY() - pointB.getY(), 2)));
 }
 
 /**
@@ -111,11 +119,12 @@ public double getDistance(PointCP3 pointB)
  * @param rotation The number of degrees to rotate the point.
  * @return The rotated image of the original point.
  */
-public PointCP2 rotatePoint(double rotation)
-{
-								return new PointCP2('C',
-								(Math.cos(Math.toRadians(rotation)) * getX()) - (Math.sin(Math.toRadians(rotation)) * getY()),
-								(Math.sin(Math.toRadians(rotation)) * getX()) + (Math.cos(Math.toRadians(rotation)) * getY()));
+public PointCP3 rotatePoint(double rotation){
+	double newTheta = getTheta()+rotation;
+	if(getType()=='C'){
+		return new PointCP3('C',Math.cos(Math.toRadians(newTheta)) * getRho(), Math.sin(Math.toRadians(newTheta)) * getRho());
+	}
+	return new PointCP3('P',getRho(),newTheta);
 }
 
 /**

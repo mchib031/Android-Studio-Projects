@@ -28,13 +28,15 @@ public class PointCP2 {
       throw new IllegalArgumentException();
 
     if (type == 'C') {
-      rho = (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
+			typeCoord = 'C';
+			rho = (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
       theta = Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
     } else {
+			typeCoord = 'P';
       rho = xOrRho;
       theta = yOrTheta;
     }
-    typeCoord = 'P';
+
   }
 //Instance methods **************************************************
 
@@ -55,19 +57,30 @@ public class PointCP2 {
 		return theta;
 	}
 
+	public char getType(){
+		return typeCoord;
+	}
+
+	private void setType(char type){
+		typeCoord = type;
+	}
+
 	/**
 	 * Cette methode permet la conversion a polaire
 	 */
-	public PointCP2 convertStorageToPolar() {
-		return this;
+	public void convertStorageToPolar() {
+		if(getType()=='C'){
+			setType('P');
+		}
 	}
 
 	/**
 	 * Cette methode permet la conversion aux coordonnes cartesienne
 	 */
-
-	public PointCP3 convertStorageToCartesian() {
-		return new PointCP3(typeCoord, getRho(), getTheta());
+	public void convertStorageToCartesian() {
+		if(getType()=='P'){
+			setType('C');
+		}
 	}
 
 	/**
@@ -79,8 +92,8 @@ public class PointCP2 {
 	 * @return The distance between the two points.
 	 */
 	public double getDistance(PointCP2 pointB) {
-
-		return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) + Math.pow(getY() - pointB.getY(), 2)));
+		return (Math.sqrt((Math.pow(this.getX() - pointB.getX(), 2) +
+												Math.pow(this.getY() - pointB.getY(), 2))));
 	}
 
 	/**
@@ -102,9 +115,11 @@ public class PointCP2 {
 	 */
 //not sure how to do this one
 	public PointCP2 rotatePoint(double rotation) {
-		return new PointCP2(typeCoord,
-				(Math.cos(Math.toRadians(rotation)) * getX()) - (Math.sin(Math.toRadians(rotation)) * getY()),
-				(Math.sin(Math.toRadians(rotation)) * getX()) + (Math.cos(Math.toRadians(rotation)) * getY()));
+		double newTheta = getTheta()+rotation;
+		if(getType()=='C'){
+			return new PointCP2('C',Math.cos(Math.toRadians(newTheta)) * rho, Math.sin(Math.toRadians(newTheta)) * rho);
+		}
+		return new PointCP2('P',getRho(),newTheta);
 	}
 
 	/**
@@ -116,5 +131,4 @@ public class PointCP2 {
 		return "Stored as " + (typeCoord == 'C' ? "Cartesian  (" + getX() + "," + getY() + ")"
 				: "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
 	}
-
 }
