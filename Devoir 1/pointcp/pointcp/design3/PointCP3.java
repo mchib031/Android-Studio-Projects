@@ -73,8 +73,17 @@ public double getTheta()
 /**
  * conertit les donnees cartesienne en donnee polaire.
  */
-public PointCP2 convertStorageToPolar(){
-								return new PointCP2(typeCoord, getX(), getY());
+public void convertStorageToPolar(){
+							//	return new PointCP2(typeCoord, getX(), getY());
+							 if(typeCoord != 'P')
+					     {
+					       //Calculate RHO and THETA
+					       double temp = getRho();
+					       theta = getTheta();
+					       rho = temp;
+
+					       typeCoord = 'P';  //Change coord type identifier
+					     }
 }
 
 
@@ -82,7 +91,7 @@ public PointCP2 convertStorageToPolar(){
  * convertit les donnees polaire en cartesienne
  */
 
-public PointCP3 convertStorageToCartesian(){
+public void convertStorageToCartesian(){
 								return this;
 }
 

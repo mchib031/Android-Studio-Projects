@@ -64,10 +64,13 @@ public class PointCPTest
       }
     }
     System.out.println("\nYou entered:\n" + point);
-    point.convertStorageToCartesian();
-    System.out.println("\nAfter asking to store as Cartesian:\n" + point);
+  //  if ( args[0] == 'P'){
+      point.convertStorageToCartesian();
+      System.out.println("\nAfter asking to store as Cartesian:\n" + point);
+    //}else{
     point.convertStorageToPolar();
     System.out.println("\nAfter asking to store as Polar:\n" + point);
+  
   }
 
   /**
