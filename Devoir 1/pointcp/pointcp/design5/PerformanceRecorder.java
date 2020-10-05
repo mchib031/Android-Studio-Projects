@@ -63,30 +63,23 @@ public class PerformanceRecorder{
     }
   }
 
-  public static PointCP2 createRandomPoints(Random rd){
+  public static PointCP5 createRandomPoints(Random rd){
     char rdType = rd.nextBoolean() ? 'C' : 'P';
     double rdXOrRho = rd.nextDouble();
     double rdYOrTheta = rd.nextDouble();
-    return new PointCP2(rdType, rdXOrRho, rdYOrTheta);
+    return new PointCP5(rdType, rdXOrRho, rdYOrTheta);
   }
 
-  public static long runRecorder(Random rd, PointCP2 testPoint){
+  public static long runRecorder(Random rd, PointCP5 testPoint){
     long endTime;
     long startTime;
     long elapsedTime;
 
     startTime = System.nanoTime();
-    testPoint.toString();
-    testPoint.getX();
-    testPoint.getY();
-    testPoint.getRho();
-    testPoint.getTheta();
-    testPoint.convertStorageToPolar();
-    testPoint.convertStorageToCartesian();
-    testPoint.getDistance(createRandomPoints(rd));
     testPoint.rotatePoint(rd.nextDouble());
     endTime = System.nanoTime();
     elapsedTime = endTime-startTime;
     return elapsedTime;
+
   }
 }

@@ -55,7 +55,7 @@ public class PerformanceRecorder{
       fw.write("For "+(i-1)+" iterations in 10 seconds we have:\n");
       fw.write("maxTime = "+maxTime+" nanoseconds\n");
       fw.write("minTime = "+minTime+" nanoseconds\n");
-      fw.write("medianTime = "+medianTime+".\n");
+      fw.write("medianTime = "+medianTime+" nanoseconds\n");
       fw.close();
       System.out.println("Successfully wrote to the file.");
     } catch (IOException e) {

@@ -1,0 +1,4 @@
+For 51587742 iterations in 10 seconds we have:
+maxTime = 2835700 nanoseconds
+minTime = 0 nanoseconds
+medianTime = 90 nanoseconds
