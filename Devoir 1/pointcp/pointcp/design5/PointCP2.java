@@ -2,9 +2,8 @@
 Description de ce programme: le programme de point CP2 fait le stockage des donnees polaire seulement.
 Les donnees cartesienne peuvent etre trouves a l'aide de calcule mais ces donnees ne vont pas etre stocker par la suite.
 Comme ce programme est specialement concu pour les coordonnes polaire alors les variables d'instances seront bien evidamment RHO et THETA
-
 */
-public class PointCP2 extends PointCP5{
+public class PointCP2 extends PointCP5 {
 
 	/**
 	 * Contient C pour (cartesian) ou P pour (polar) pour identifier le tye de donnees dans cette variable.
@@ -28,13 +27,15 @@ public class PointCP2 extends PointCP5{
       throw new IllegalArgumentException();
 
     if (type == 'C') {
-      rho = (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
+			typeCoord = 'C';
+			rho = (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
       theta = Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
     } else {
+			typeCoord = 'P';
       rho = xOrRho;
       theta = yOrTheta;
     }
-    typeCoord = 'P';
+
   }
 //Instance methods **************************************************
 
@@ -55,36 +56,30 @@ public class PointCP2 extends PointCP5{
 		return theta;
 	}
 
+	public char getType(){
+		return typeCoord;
+	}
+
+	private void setType(char type){
+		typeCoord = type;
+	}
+
 	/**
 	 * Cette methode permet la conversion a polaire
 	 */
-	 public void convertStorageToPolar()
-   {
-    /* if(typeCoord != 'P')
-     {
-       //Calculate RHO and THETA
-       double temp = getRho();
-       theta = getTheta();
-       rho = temp;
+	public void convertStorageToPolar() {
+		if(getType()=='C'){
+			setType('P');
+		}
+	}
 
-       typeCoord = 'P';  //Change coord type identifier
-     }*/
-   }
-
-   /**
-    * Converts Polar coordinates to Cartesian coordinates.
-    */
-   public void convertStorageToCartesian()
-   {
-     if(typeCoord != 'C')
-     {
-       //Calculate X and Y
-       double temp = getX();
-       theta = getY();
-       rho = temp;
-
-       typeCoord = 'C';	//Change coord type identifier
-     }
+	/**
+	 * Cette methode permet la conversion aux coordonnes cartesienne
+	 */
+	public void convertStorageToCartesian() {
+		if(getType()=='P'){
+			setType('C');
+		}
 	}
 
 	/**
@@ -96,8 +91,8 @@ public class PointCP2 extends PointCP5{
 	 * @return The distance between the two points.
 	 */
 	public double getDistance(PointCP2 pointB) {
-
-		return Math.sqrt((Math.pow(getX() - pointB.getX(), 2) + Math.pow(getY() - pointB.getY(), 2)));
+		return (Math.sqrt((Math.pow(this.getX() - pointB.getX(), 2) +
+												Math.pow(this.getY() - pointB.getY(), 2))));
 	}
 
 	/**
@@ -117,11 +112,13 @@ public class PointCP2 extends PointCP5{
 	 * @param rotation The number of degrees to rotate the point.
 	 * @return The rotated image of the original point.
 	 */
-
+//not sure how to do this one
 	public PointCP2 rotatePoint(double rotation) {
-		return new PointCP2(typeCoord,
-				(Math.cos(Math.toRadians(rotation)) * getX()) - (Math.sin(Math.toRadians(rotation)) * getY()),
-				(Math.sin(Math.toRadians(rotation)) * getX()) + (Math.cos(Math.toRadians(rotation)) * getY()));
+		double newTheta = getTheta()+rotation;
+		if(getType()=='C'){
+			return new PointCP2('C',Math.cos(Math.toRadians(newTheta)) * rho, Math.sin(Math.toRadians(newTheta)) * rho);
+		}
+		return new PointCP2('P',getRho(),newTheta);
 	}
 
 	/**
@@ -133,5 +130,4 @@ public class PointCP2 extends PointCP5{
 		return "Stored as " + (typeCoord == 'C' ? "Cartesian  (" + getX() + "," + getY() + ")"
 				: "Polar [" + getRho() + "," + getTheta() + "]") + "\n";
 	}
-
 }

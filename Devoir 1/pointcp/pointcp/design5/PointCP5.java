@@ -14,8 +14,6 @@
  */
 
  /* Decsription generale: la classe PointCP5 est une classe abstraite qui a comme sous classe CP2 et CP3. Donc pour trouver les coordonnes cartesiennes et polaires ca depend de la classe concrete qui va etre utilise.
-
-
  */
 abstract class PointCP5{
 

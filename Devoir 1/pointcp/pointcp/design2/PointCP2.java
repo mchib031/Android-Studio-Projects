@@ -1,4 +1,3 @@
-
 /*
 Description de ce programme: le programme de point CP2 fait le stockage des donnees polaire seulement.
 Les donnees cartesienne peuvent etre trouves a l'aide de calcule mais ces donnees ne vont pas etre stocker par la suite.
