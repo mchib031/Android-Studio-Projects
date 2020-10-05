@@ -1,0 +1,1 @@
+For 10 iterations we have:maxTime = 1.minTime = 0.medianTime = 0.
