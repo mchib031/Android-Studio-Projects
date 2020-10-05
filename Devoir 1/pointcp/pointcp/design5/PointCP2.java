@@ -23,19 +23,20 @@ public class PointCP2 extends PointCP5 {
 //Constructeurs
 
 	public PointCP2(char type, double xOrRho, double yOrTheta) {
-    if (type != 'C' && type != 'P')
+		super(type,xOrRho,yOrTheta);
+		if (type != 'C' && type != 'P')
       throw new IllegalArgumentException();
 
     if (type == 'C') {
 			typeCoord = 'C';
 			rho = (Math.sqrt(Math.pow(xOrRho, 2) + Math.pow(yOrTheta, 2)));
       theta = Math.toDegrees(Math.atan2(yOrTheta, xOrRho));
-    } else {
+
+		} else {
 			typeCoord = 'P';
       rho = xOrRho;
       theta = yOrTheta;
     }
-
   }
 //Instance methods **************************************************
 

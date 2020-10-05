@@ -37,13 +37,6 @@ private double yOrTheta;
 
 
 public PointCP5(char type, double xOrRho, double yOrTheta){
-
-								if(type != 'C' && type != 'P'){
-											throw new IllegalArgumentException();
-								}
-								this.xOrRho = xOrRho;
-								this.yOrTheta = yOrTheta;
-								typeCoord = type;
 }
 
 
@@ -60,12 +53,12 @@ public abstract double getTheta();
 /**
  * Convertit cartesien --> polaire
  */
-public abstract PointCP5 convertStorageToPolar();
+public abstract void convertStorageToPolar();
 
 /**
  * Convertit polaire ---> cartesienne
  */
-public abstract PointCP5 convertStorageToCartesian();
+public abstract void convertStorageToCartesian();
 
 /**
  * Calculates the distance in between two points using the Pythagorean
