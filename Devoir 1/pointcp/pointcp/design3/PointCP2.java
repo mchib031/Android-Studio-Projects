@@ -58,16 +58,33 @@ public class PointCP2 {
 	/**
 	 * Cette methode permet la conversion a polaire
 	 */
-	public PointCP2 convertStorageToPolar() {
-		return this;
-	}
+	 public void convertStorageToPolar()
+   {
+    /* if(typeCoord != 'P')
+     {
+       //Calculate RHO and THETA
+       double temp = getRho();
+       theta = getTheta();
+       rho = temp;
 
-	/**
-	 * Cette methode permet la conversion aux coordonnes cartesienne
-	 */
+       typeCoord = 'P';  //Change coord type identifier
+     }*/
+   }
 
-	public PointCP3 convertStorageToCartesian() {
-		return new PointCP3(typeCoord, getRho(), getTheta());
+   /**
+    * Converts Polar coordinates to Cartesian coordinates.
+    */
+   public void convertStorageToCartesian()
+   {
+     if(typeCoord != 'C')
+     {
+       //Calculate X and Y
+       double temp = getX();
+       theta = getY();
+       rho = temp;
+
+       typeCoord = 'C';	//Change coord type identifier
+     }
 	}
 
 	/**
@@ -100,7 +117,7 @@ public class PointCP2 {
 	 * @param rotation The number of degrees to rotate the point.
 	 * @return The rotated image of the original point.
 	 */
-//not sure how to do this one
+
 	public PointCP2 rotatePoint(double rotation) {
 		return new PointCP2(typeCoord,
 				(Math.cos(Math.toRadians(rotation)) * getX()) - (Math.sin(Math.toRadians(rotation)) * getY()),
