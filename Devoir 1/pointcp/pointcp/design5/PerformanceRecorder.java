@@ -76,6 +76,14 @@ public class PerformanceRecorder{
     long elapsedTime;
 
     startTime = System.nanoTime();
+    testPoint.toString();
+    testPoint.getX();
+    testPoint.getY();
+    testPoint.getRho();
+    testPoint.getTheta();
+    testPoint.convertStorageToPolar();
+    testPoint.convertStorageToCartesian();
+    testPoint.getDistance(createRandomPoints(rd));
     testPoint.rotatePoint(rd.nextDouble());
     endTime = System.nanoTime();
     elapsedTime = endTime-startTime;
