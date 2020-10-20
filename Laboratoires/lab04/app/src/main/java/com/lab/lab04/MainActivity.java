@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     public void onOpenInGoogleMaps(View view){
         EditText teamAddress = (EditText)findViewById(R.id.teamAdressField);
         Uri gmmIntentUri = Uri.parse("http://maps.google.co.in/maps?q="+teamAddress.getText());
-        Intent mapIntent = new Intent(Intent.ACTION_VIEW);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW,gmmIntentUri);
         mapIntent.setPackage("com.google.android.apps.maps");
         startActivity(mapIntent);
     }
