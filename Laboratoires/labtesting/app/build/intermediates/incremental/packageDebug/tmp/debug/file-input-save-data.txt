@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Tue Nov 17 02:12:11 EST 2020
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Jedd\\Documents\\School\\SEG2505\\SEG\\Laboratoires\\labtesting\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+0.path=classes.dex
+0.set=DEX
+count=1
