@@ -1,4 +1,4 @@
-#Tue Nov 17 14:59:55 EST 2020
-base.0=C\:\\SEG\\SEG\\Laboratoires\\labtesting\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\0
+#Tue Nov 17 02:41:34 EST 2020
+base.0=C\:\\Users\\Jedd\\Documents\\School\\SEG2505\\SEG\\Laboratoires\\labtesting\\app\\build\\intermediates\\transforms\\dexMerger\\androidTest\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex
